@@ -14,11 +14,16 @@ public class PanelDibujo extends JPanel {
 
     // Definimos la paleta de colores en función de la profundidad
     private final Color[] colores = {
-            new Color(0x386641),  // Nivel 0 (Raíz)
-            new Color(0x6A994E),  // Nivel 1
-            new Color(0xA7C957),  // Nivel 2
-            new Color(0xF2E8CF),  // Nivel 3
-            new Color(0xBC4749)   // Nivel 4 y en adelante
+
+            new Color(0xbc6c25),// Nivel 0 (Raíz)
+            new Color(0xdda15e),// Nivel 1
+            new Color(0x155d27),// Nivel 2
+            new Color(0x25a244),// Nivel 3
+            new Color(0x386641),// Nivel 4
+            new Color(0x6A994E),// Nivel 5
+            new Color(0xA7C957),// Nivel 6
+            new Color(0xF2E8CF),// Nivel 7
+            new Color(0xBC4749) // Nivel 8
     };
 
     public void setArbol(ArbolBinario arbol) {

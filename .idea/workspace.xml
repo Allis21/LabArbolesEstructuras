@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e0d34078-85ff-47e5-a7a4-dafa33a11411" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Arbol/ArbolBinario.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Arbol/Nodo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gui/ArbolBinarioApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gui/PanelDibujo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/labarbolesestructuras/HelloApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/labarbolesestructuras/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/PanelDibujo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/PanelDibujo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +94,7 @@
       <option name="presentableId" value="Default" />
       <updated>1729830285062</updated>
       <workItem from="1729830286372" duration="6000" />
-      <workItem from="1729899066258" duration="851000" />
+      <workItem from="1729899066258" duration="2475000" />
     </task>
     <servers />
   </component>
