@@ -3,6 +3,10 @@ package gui;
 import Arbol.ArbolBinario;
 import javax.swing.*;
 import java.awt.*;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 public class ArbolBinarioApp extends JFrame {
     private ArbolBinario arbol1;
@@ -76,6 +80,7 @@ public class ArbolBinarioApp extends JFrame {
         JButton btnNivel = crearBoton("Obtener Nivel", "Obtiene el nivel de un elemento en ambos árboles");
         JButton btnMinimo = crearBoton("Valor Mínimo", "Encuentra el valor mínimo en ambos árboles");
         JButton btnHojas = crearBoton("Contar Hojas", "Cuenta las hojas de ambos árboles");
+        JButton btnImprimirHorizontal = crearBoton("Imprimir Horizontal", "Muestra los árboles en formato horizontal");
 
         panelBotones.add(btnCrearArbol1);
         panelBotones.add(btnInsertarNodo1);
@@ -90,6 +95,7 @@ public class ArbolBinarioApp extends JFrame {
         panelBotones.add(btnNivel);
         panelBotones.add(btnMinimo);
         panelBotones.add(btnHojas);
+        panelBotones.add(btnImprimirHorizontal);
 
 
         btnCrearArbol1.addActionListener(e -> {
@@ -116,6 +122,8 @@ public class ArbolBinarioApp extends JFrame {
         btnNivel.addActionListener(e -> obtenerNivel());
         btnMinimo.addActionListener(e -> obtenerMinimos());
         btnHojas.addActionListener(e -> contarHojas());
+        btnImprimirHorizontal.addActionListener(e -> imprimirHorizontal());
+
     }
 
     private void mostrarAlturasSinRecursividad() {
@@ -270,7 +278,49 @@ public class ArbolBinarioApp extends JFrame {
         }
         areaResultados.setText(resultado.toString());
     }
+    private void imprimirHorizontal() {
+        StringBuilder resultado = new StringBuilder("Representación horizontal de los árboles:\n\n");
 
+        if (arbol1 != null) {
+            resultado.append("Árbol 1:\n");
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            PrintStream originalOut = System.out;
+            System.setOut(new PrintStream(new OutputStream() {
+                @Override
+                public void write(int b) {
+                    pw.write(b);
+                }
+            }));
+
+            arbol1.imprimirHorizontal();
+            System.setOut(originalOut);
+            resultado.append(sw.toString()).append("\n\n");
+        } else {
+            resultado.append("Árbol 1: No creado\n\n");
+        }
+
+        if (arbol2 != null) {
+            resultado.append("Árbol 2:\n");
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            PrintStream originalOut = System.out;
+            System.setOut(new PrintStream(new OutputStream() {
+                @Override
+                public void write(int b) {
+                    pw.write(b);
+                }
+            }));
+
+            arbol2.imprimirHorizontal();
+            System.setOut(originalOut);
+            resultado.append(sw.toString());
+        } else {
+            resultado.append("Árbol 2: No creado");
+        }
+
+        areaResultados.setText(resultado.toString());
+    }
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             new ArbolBinarioApp().setVisible(true);
