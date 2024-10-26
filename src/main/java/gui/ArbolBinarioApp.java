@@ -27,7 +27,8 @@ public class ArbolBinarioApp extends JFrame {
         JPanel panelPrincipal = new JPanel(new BorderLayout(10, 10));
         panelPrincipal.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        JPanel panelBotones = new JPanel(new GridLayout(2, 7, 10, 10));
+        // Changed to 3 rows, 6 columns for better organization
+        JPanel panelBotones = new JPanel(new GridLayout(3, 6, 10, 10));
         crearBotones(panelBotones);
 
         panelArboles = new JPanel(new GridLayout(1, 2, 20, 0));
@@ -65,39 +66,56 @@ public class ArbolBinarioApp extends JFrame {
     }
 
     private void crearBotones(JPanel panelBotones) {
+        // Árbol 1 operations
         JButton btnCrearArbol1 = crearBoton("Crear Árbol 1", "Crea un nuevo árbol binario vacío");
         JButton btnInsertarNodo1 = crearBoton("Insertar en Árbol 1", "Inserta un nuevo valor en el árbol 1");
         JButton btnEliminarNodo1 = crearBoton("Eliminar de Árbol 1", "Elimina un valor del árbol 1");
 
+        // Árbol 2 operations
         JButton btnCrearArbol2 = crearBoton("Crear Árbol 2", "Crea un nuevo árbol binario vacío");
         JButton btnInsertarNodo2 = crearBoton("Insertar en Árbol 2", "Inserta un nuevo valor en el árbol 2");
         JButton btnEliminarNodo2 = crearBoton("Eliminar de Árbol 2", "Elimina un valor del árbol 2");
 
+        // Tree analysis operations - Row 1
         JButton btnVerificarIdenticos = crearBoton("Verificar si son Idénticos", "Compara si los árboles son idénticos");
         JButton btnAltura = crearBoton("Obtener Alturas (Recursivo)", "Muestra la altura de ambos árboles usando recursividad");
         JButton btnAlturaSinRecursividad = crearBoton("Obtener Alturas (No Recursivo)", "Muestra la altura de ambos árboles sin usar recursividad");
         JButton btnAmplitud = crearBoton("Recorrido Amplitud", "Muestra el recorrido en amplitud de ambos árboles");
         JButton btnNivel = crearBoton("Obtener Nivel", "Obtiene el nivel de un elemento en ambos árboles");
         JButton btnMinimo = crearBoton("Valor Mínimo", "Encuentra el valor mínimo en ambos árboles");
+
+        // Tree analysis operations - Row 2
         JButton btnHojas = crearBoton("Contar Hojas", "Cuenta las hojas de ambos árboles");
         JButton btnImprimirHorizontal = crearBoton("Imprimir Horizontal", "Muestra los árboles en formato horizontal");
+        JButton btnMinimoRecursivo = crearBoton("Valor Mínimo (Recursivo)", "Encuentra el valor mínimo en ambos árboles usando recursividad");
 
+        // Adding buttons in order by row
+        // First row - Basic operations for both trees
         panelBotones.add(btnCrearArbol1);
         panelBotones.add(btnInsertarNodo1);
         panelBotones.add(btnEliminarNodo1);
         panelBotones.add(btnCrearArbol2);
         panelBotones.add(btnInsertarNodo2);
         panelBotones.add(btnEliminarNodo2);
+
+        // Second row - First set of analysis operations
         panelBotones.add(btnVerificarIdenticos);
         panelBotones.add(btnAltura);
         panelBotones.add(btnAlturaSinRecursividad);
         panelBotones.add(btnAmplitud);
         panelBotones.add(btnNivel);
         panelBotones.add(btnMinimo);
+
+        // Third row - Second set of analysis operations
         panelBotones.add(btnHojas);
         panelBotones.add(btnImprimirHorizontal);
+        panelBotones.add(btnMinimoRecursivo);
+        // Adding empty panels to fill the remaining spots in the grid
+        panelBotones.add(new JPanel());
+        panelBotones.add(new JPanel());
+        panelBotones.add(new JPanel());
 
-
+        // Action Listeners
         btnCrearArbol1.addActionListener(e -> {
             arbol1 = new ArbolBinario();
             panelDibujo1.setArbol(arbol1);
@@ -123,7 +141,7 @@ public class ArbolBinarioApp extends JFrame {
         btnMinimo.addActionListener(e -> obtenerMinimos());
         btnHojas.addActionListener(e -> contarHojas());
         btnImprimirHorizontal.addActionListener(e -> imprimirHorizontal());
-
+        btnMinimoRecursivo.addActionListener(e -> obtenerMinimosRecursivo());
     }
 
     private void mostrarAlturasSinRecursividad() {
@@ -319,6 +337,28 @@ public class ArbolBinarioApp extends JFrame {
             resultado.append("Árbol 2: No creado");
         }
 
+        areaResultados.setText(resultado.toString());
+    }
+    private void obtenerMinimosRecursivo() {
+        StringBuilder resultado = new StringBuilder("Valores mínimos (recursivo):\n");
+        if (arbol1 != null && arbol1.raiz != null) {
+            try {
+                resultado.append("Árbol 1: ").append(arbol1.obtenerMinimoRecursivo()).append("\n");
+            } catch (RuntimeException ex) {
+                resultado.append("Árbol 1: Vacío\n");
+            }
+        } else {
+            resultado.append("Árbol 1: No creado o vacío\n");
+        }
+        if (arbol2 != null && arbol2.raiz != null) {
+            try {
+                resultado.append("Árbol 2: ").append(arbol2.obtenerMinimoRecursivo());
+            } catch (RuntimeException ex) {
+                resultado.append("Árbol 2: Vacío");
+            }
+        } else {
+            resultado.append("Árbol 2: No creado o vacío");
+        }
         areaResultados.setText(resultado.toString());
     }
     public static void main(String[] args) {
