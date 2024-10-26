@@ -20,18 +20,14 @@ public class ArbolBinarioApp extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Panel principal
         JPanel panelPrincipal = new JPanel(new BorderLayout(10, 10));
         panelPrincipal.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Panel de botones en la parte superior
-        JPanel panelBotones = new JPanel(new GridLayout(2, 6, 10, 10));
+        JPanel panelBotones = new JPanel(new GridLayout(2, 7, 10, 10));
         crearBotones(panelBotones);
 
-        // Panel para los dos árboles
         panelArboles = new JPanel(new GridLayout(1, 2, 20, 0));
 
-        // Panel para el primer árbol
         JPanel panel1 = new JPanel(new BorderLayout());
         lblArbol1 = new JLabel("Árbol 1", SwingConstants.CENTER);
         lblArbol1.setFont(new Font("Arial", Font.BOLD, 14));
@@ -40,7 +36,6 @@ public class ArbolBinarioApp extends JFrame {
         panel1.add(lblArbol1, BorderLayout.NORTH);
         panel1.add(panelDibujo1, BorderLayout.CENTER);
 
-        // Panel para el segundo árbol
         JPanel panel2 = new JPanel(new BorderLayout());
         lblArbol2 = new JLabel("Árbol 2", SwingConstants.CENTER);
         lblArbol2.setFont(new Font("Arial", Font.BOLD, 14));
@@ -52,14 +47,12 @@ public class ArbolBinarioApp extends JFrame {
         panelArboles.add(panel1);
         panelArboles.add(panel2);
 
-        // Área de resultados
         areaResultados = new JTextArea(8, 50);
         areaResultados.setEditable(false);
         areaResultados.setFont(new Font("Monospaced", Font.PLAIN, 14));
         JScrollPane scrollResultados = new JScrollPane(areaResultados);
         scrollResultados.setBorder(BorderFactory.createTitledBorder("Resultados"));
 
-        // Agregar componentes al panel principal
         panelPrincipal.add(panelBotones, BorderLayout.NORTH);
         panelPrincipal.add(panelArboles, BorderLayout.CENTER);
         panelPrincipal.add(scrollResultados, BorderLayout.SOUTH);
@@ -68,25 +61,22 @@ public class ArbolBinarioApp extends JFrame {
     }
 
     private void crearBotones(JPanel panelBotones) {
-        // Botones para el Árbol 1
         JButton btnCrearArbol1 = crearBoton("Crear Árbol 1", "Crea un nuevo árbol binario vacío");
         JButton btnInsertarNodo1 = crearBoton("Insertar en Árbol 1", "Inserta un nuevo valor en el árbol 1");
         JButton btnEliminarNodo1 = crearBoton("Eliminar de Árbol 1", "Elimina un valor del árbol 1");
 
-        // Botones para el Árbol 2
         JButton btnCrearArbol2 = crearBoton("Crear Árbol 2", "Crea un nuevo árbol binario vacío");
         JButton btnInsertarNodo2 = crearBoton("Insertar en Árbol 2", "Inserta un nuevo valor en el árbol 2");
         JButton btnEliminarNodo2 = crearBoton("Eliminar de Árbol 2", "Elimina un valor del árbol 2");
 
-        // Botones de operaciones
         JButton btnVerificarIdenticos = crearBoton("Verificar si son Idénticos", "Compara si los árboles son idénticos");
-        JButton btnAltura = crearBoton("Obtener Alturas", "Muestra la altura de ambos árboles");
-        JButton btnHojas = crearBoton("Contar Hojas", "Cuenta las hojas de ambos árboles");
+        JButton btnAltura = crearBoton("Obtener Alturas (Recursivo)", "Muestra la altura de ambos árboles usando recursividad");
+        JButton btnAlturaSinRecursividad = crearBoton("Obtener Alturas (No Recursivo)", "Muestra la altura de ambos árboles sin usar recursividad");
         JButton btnAmplitud = crearBoton("Recorrido Amplitud", "Muestra el recorrido en amplitud de ambos árboles");
         JButton btnNivel = crearBoton("Obtener Nivel", "Obtiene el nivel de un elemento en ambos árboles");
         JButton btnMinimo = crearBoton("Valor Mínimo", "Encuentra el valor mínimo en ambos árboles");
+        JButton btnHojas = crearBoton("Contar Hojas", "Cuenta las hojas de ambos árboles");
 
-        // Agregar botones al panel
         panelBotones.add(btnCrearArbol1);
         panelBotones.add(btnInsertarNodo1);
         panelBotones.add(btnEliminarNodo1);
@@ -95,12 +85,13 @@ public class ArbolBinarioApp extends JFrame {
         panelBotones.add(btnEliminarNodo2);
         panelBotones.add(btnVerificarIdenticos);
         panelBotones.add(btnAltura);
-        panelBotones.add(btnHojas);
+        panelBotones.add(btnAlturaSinRecursividad);
         panelBotones.add(btnAmplitud);
         panelBotones.add(btnNivel);
         panelBotones.add(btnMinimo);
+        panelBotones.add(btnHojas);
 
-        // Configurar acciones de los botones
+
         btnCrearArbol1.addActionListener(e -> {
             arbol1 = new ArbolBinario();
             panelDibujo1.setArbol(arbol1);
@@ -120,12 +111,29 @@ public class ArbolBinarioApp extends JFrame {
 
         btnVerificarIdenticos.addActionListener(e -> verificarIdenticos());
         btnAltura.addActionListener(e -> mostrarAlturas());
-        btnHojas.addActionListener(e -> contarHojas());
+        btnAlturaSinRecursividad.addActionListener(e -> mostrarAlturasSinRecursividad());
         btnAmplitud.addActionListener(e -> mostrarRecorridoAmplitud());
         btnNivel.addActionListener(e -> obtenerNivel());
         btnMinimo.addActionListener(e -> obtenerMinimos());
+        btnHojas.addActionListener(e -> contarHojas());
     }
 
+    private void mostrarAlturasSinRecursividad() {
+        StringBuilder resultado = new StringBuilder("Alturas de los árboles (sin recursividad):\n");
+        if (arbol1 != null) {
+            resultado.append("Árbol 1: ").append(arbol1.obtenerAlturaSinRecursividad()).append("\n");
+        } else {
+            resultado.append("Árbol 1: No creado\n");
+        }
+        if (arbol2 != null) {
+            resultado.append("Árbol 2: ").append(arbol2.obtenerAlturaSinRecursividad());
+        } else {
+            resultado.append("Árbol 2: No creado");
+        }
+        areaResultados.setText(resultado.toString());
+    }
+
+    // Keep existing helper methods
     private JButton crearBoton(String texto, String tooltip) {
         JButton boton = new JButton(texto);
         boton.setToolTipText(tooltip);
@@ -180,7 +188,7 @@ public class ArbolBinarioApp extends JFrame {
     }
 
     private void mostrarAlturas() {
-        StringBuilder resultado = new StringBuilder("Alturas de los árboles:\n");
+        StringBuilder resultado = new StringBuilder("Alturas de los árboles (recursivo):\n");
         if (arbol1 != null) {
             resultado.append("Árbol 1: ").append(arbol1.obtenerAltura(arbol1.raiz)).append("\n");
         } else {
@@ -188,21 +196,6 @@ public class ArbolBinarioApp extends JFrame {
         }
         if (arbol2 != null) {
             resultado.append("Árbol 2: ").append(arbol2.obtenerAltura(arbol2.raiz));
-        } else {
-            resultado.append("Árbol 2: No creado");
-        }
-        areaResultados.setText(resultado.toString());
-    }
-
-    private void contarHojas() {
-        StringBuilder resultado = new StringBuilder("Número de hojas:\n");
-        if (arbol1 != null) {
-            resultado.append("Árbol 1: ").append(arbol1.contarHojas(arbol1.raiz)).append("\n");
-        } else {
-            resultado.append("Árbol 1: No creado\n");
-        }
-        if (arbol2 != null) {
-            resultado.append("Árbol 2: ").append(arbol2.contarHojas(arbol2.raiz));
         } else {
             resultado.append("Árbol 2: No creado");
         }
@@ -260,6 +253,20 @@ public class ArbolBinarioApp extends JFrame {
             resultado.append("Árbol 2: ").append(arbol2.obtenerMinimoNoRecursivo());
         } else {
             resultado.append("Árbol 2: No creado o vacío");
+        }
+        areaResultados.setText(resultado.toString());
+    }
+    private void contarHojas() {
+        StringBuilder resultado = new StringBuilder("Número de hojas:\n");
+        if (arbol1 != null) {
+            resultado.append("Árbol 1: ").append(arbol1.contarHojas(arbol1.raiz)).append("\n");
+        } else {
+            resultado.append("Árbol 1: No creado\n");
+        }
+        if (arbol2 != null) {
+            resultado.append("Árbol 2: ").append(arbol2.contarHojas(arbol2.raiz));
+        } else {
+            resultado.append("Árbol 2: No creado");
         }
         areaResultados.setText(resultado.toString());
     }
