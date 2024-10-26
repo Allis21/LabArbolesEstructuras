@@ -6,6 +6,7 @@ import java.util.Queue;
 
 public class ArbolBinario {
     public Nodo raiz;
+    public NodoExpresion raizExpresion;
 
     public void insertar(int valor) {
         raiz = insertarRec(raiz, valor);
@@ -130,6 +131,27 @@ public class ArbolBinario {
             }
         }
         return altura;
+    }
+
+    public void dibujarExpresionA() {
+        NodoExpresion nodoMultiplicacion = new NodoExpresion("*");
+        NodoExpresion nodoDivision = new NodoExpresion("/");
+        NodoExpresion nodoSuma = new NodoExpresion("+");
+
+        NodoExpresion nodoA = new NodoExpresion("a");
+        NodoExpresion nodoB = new NodoExpresion("b");
+        NodoExpresion nodoC = new NodoExpresion("c");
+        NodoExpresion nodoD = new NodoExpresion("d");
+
+        nodoMultiplicacion.izquierdo = nodoA;
+        nodoMultiplicacion.derecho = nodoB;
+        nodoDivision.izquierdo = nodoC;
+        nodoDivision.derecho = nodoD;
+
+        nodoSuma.izquierdo = nodoMultiplicacion;
+        nodoSuma.derecho = nodoDivision;
+
+        raizExpresion = nodoSuma;
     }
 
 

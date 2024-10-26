@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e0d34078-85ff-47e5-a7a4-dafa33a11411" name="Changes" comment="se agrego el boton de obtener altura sin recursividad">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Arbol/NodoExpresion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Arbol/ArbolBinario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Arbol/ArbolBinario.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,8 +94,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.20224.300" />
-        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-IU-242.20224.300" />
+        <option value="jdk-21.0.2-semeru-21.0.2-4caba194b151-2a6dbd63" />
       </set>
     </attachedChunks>
   </component>
@@ -108,6 +110,7 @@
       <workItem from="1729899066258" duration="2475000" />
       <workItem from="1729915344995" duration="2100000" />
       <workItem from="1729967054843" duration="2308000" />
+      <workItem from="1729971860876" duration="1481000" />
     </task>
     <task id="LOCAL-00001" summary="cambio de interfaz e implementacion de otros metodos">
       <option name="closed" value="true" />
@@ -130,6 +133,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="cambio de interfaz e implementacion de otros metodos" />
