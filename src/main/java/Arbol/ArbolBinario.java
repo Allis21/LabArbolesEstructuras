@@ -131,6 +131,21 @@ public class ArbolBinario {
         }
         return altura;
     }
+    public int obtenerMinimoRecursivo() {
+        if (raiz == null) {
+            throw new RuntimeException("El árbol está vacío");
+        }
+        return obtenerMinimoRecursivo(raiz);
+    }
+
+    private int obtenerMinimoRecursivo(Nodo nodo) {
+        // Caso base: si no hay hijo izquierdo, este es el valor mínimo
+        if (nodo.izquierdo == null) {
+            return nodo.valor;
+        }
+        // Caso recursivo: seguir buscando en el subárbol izquierdo
+        return obtenerMinimoRecursivo(nodo.izquierdo);
+    }
 
 
 }
