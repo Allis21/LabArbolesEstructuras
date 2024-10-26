@@ -1,74 +1,156 @@
 package gui;
 
-
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.*;
 import Arbol.ArbolBinario;
 import Arbol.Nodo;
 
 public class PanelDibujo extends JPanel {
     private ArbolBinario arbol;
-    private static final int DIAMETRO_NODO = 30;
-    private static final int ESPACIO_HORIZONTAL = 50;
-    private static final int ESPACIO_VERTICAL = 50;
+    private static final int DIAMETRO_NODO = 40;
+    private static final int ESPACIO_VERTICAL = 60;
+    private static final int PADDING = 20;
 
-    // Definimos la paleta de colores en función de la profundidad
+    // Colores mejorados con mejor contraste y estética
     private final Color[] colores = {
-
-            new Color(0xbc6c25),// Nivel 0 (Raíz)
-            new Color(0xdda15e),// Nivel 1
-            new Color(0x155d27),// Nivel 2
-            new Color(0x25a244),// Nivel 3
-            new Color(0x386641),// Nivel 4
-            new Color(0x6A994E),// Nivel 5
-            new Color(0xA7C957),// Nivel 6
-            new Color(0xF2E8CF),// Nivel 7
-            new Color(0xBC4749) // Nivel 8
+            new Color(0x2E86AB), // Azul oscuro - Raíz
+            new Color(0x34AC98), // Verde azulado
+            new Color(0x40BF7D), // Verde medio
+            new Color(0x8CBF40), // Verde lima
+            new Color(0xBFB740), // Amarillo mostaza
+            new Color(0xBF8D40), // Naranja marrón
+            new Color(0xBF6340), // Naranja rojizo
+            new Color(0xBF4040), // Rojo
+            new Color(0x9340BF)  // Púrpura
     };
+
+    // Añadimos un color para el borde y el texto
+    private final Color colorBorde = new Color(0x2C3E50);
+    private final Color colorTexto = new Color(0xFFFFFF);
+
+    public PanelDibujo() {
+        setBackground(new Color(0xF5F6FA));
+        // Habilitar antialiasing
+        setDoubleBuffered(true);
+    }
 
     public void setArbol(ArbolBinario arbol) {
         this.arbol = arbol;
+        repaint();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+
+        // Configurar renderizado para mejor calidad
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
         if (arbol != null && arbol.raiz != null) {
-            dibujarNodo(g, arbol.raiz, getWidth() / 2, 50, getWidth() / 4, 0);
+            // Calcular la altura del árbol para ajustar el espaciado
+            int altura = arbol.obtenerAltura(arbol.raiz);
+            int espacioHorizontal = calcularEspacioHorizontal(altura);
+
+            // Dibujar el árbol centrado
+            dibujarNodo(g2d, arbol.raiz, getWidth() / 2, PADDING + DIAMETRO_NODO,
+                    espacioHorizontal, 0, altura);
+        } else {
+            // Mostrar mensaje cuando el árbol está vacío
+            g2d.setColor(colorBorde);
+            g2d.setFont(new Font("Arial", Font.BOLD, 16));
+            String mensaje = "Árbol vacío";
+            FontMetrics fm = g2d.getFontMetrics();
+            g2d.drawString(mensaje,
+                    (getWidth() - fm.stringWidth(mensaje)) / 2,
+                    getHeight() / 2);
         }
     }
 
-    /**
-     * Dibuja un nodo del árbol binario recursivamente.
-     * @param g Graphics para dibujar.
-     * @param nodo El nodo actual.
-     * @param x La posición x del nodo.
-     * @param y La posición y del nodo.
-     * @param espacio Espacio horizontal entre nodos.
-     * @param nivel Nivel de profundidad del nodo.
-     */
-    private void dibujarNodo(Graphics g, Nodo nodo, int x, int y, int espacio, int nivel) {
+    private int calcularEspacioHorizontal(int altura) {
+        return Math.max(DIAMETRO_NODO * 2, (getWidth() - 2 * PADDING) / (1 << altura));
+    }
+
+    private void dibujarNodo(Graphics2D g2d, Nodo nodo, int x, int y, int espacio,
+                             int nivel, int alturaTotal) {
         if (nodo == null) return;
 
-        // Seleccionamos el color basado en el nivel de profundidad
+        // Seleccionar color según nivel
         Color colorNodo = nivel < colores.length ? colores[nivel] : colores[colores.length - 1];
-        g.setColor(colorNodo);
 
-        // Dibujamos el nodo como un óvalo coloreado
-        g.fillOval(x - DIAMETRO_NODO / 2, y - DIAMETRO_NODO / 2, DIAMETRO_NODO, DIAMETRO_NODO);
-        g.setColor(Color.BLACK);
-        g.drawOval(x - DIAMETRO_NODO / 2, y - DIAMETRO_NODO / 2, DIAMETRO_NODO, DIAMETRO_NODO);
-        g.drawString(Integer.toString(nodo.valor), x - 6, y + 4);
+        // Crear efecto de sombra
+        g2d.setColor(new Color(0, 0, 0, 50));
+        g2d.fillOval(x - DIAMETRO_NODO/2 + 2, y - DIAMETRO_NODO/2 + 2,
+                DIAMETRO_NODO, DIAMETRO_NODO);
 
-        // Dibujamos las conexiones a los hijos
+        // Dibujar conexiones primero (para que queden detrás de los nodos)
+        g2d.setStroke(new BasicStroke(2.0f));
+        g2d.setColor(new Color(0x95A5A6));
+
         if (nodo.izquierdo != null) {
-            g.drawLine(x, y, x - espacio, y + ESPACIO_VERTICAL);
-            dibujarNodo(g, nodo.izquierdo, x - espacio, y + ESPACIO_VERTICAL, espacio / 2, nivel + 1);
+            g2d.draw(new Line2D.Double(
+                    x, y,
+                    x - espacio, y + ESPACIO_VERTICAL
+            ));
+        }
+        if (nodo.derecho != null) {
+            g2d.draw(new Line2D.Double(
+                    x, y,
+                    x + espacio, y + ESPACIO_VERTICAL
+            ));
         }
 
-        if (nodo.derecho != null) {
-            g.drawLine(x, y, x + espacio, y + ESPACIO_VERTICAL);
-            dibujarNodo(g, nodo.derecho, x + espacio, y + ESPACIO_VERTICAL, espacio / 2, nivel + 1);
+        // Dibujar el nodo
+        // Círculo principal
+        g2d.setColor(colorNodo);
+        g2d.fill(new Ellipse2D.Double(
+                x - DIAMETRO_NODO/2, y - DIAMETRO_NODO/2,
+                DIAMETRO_NODO, DIAMETRO_NODO
+        ));
+
+        // Borde del nodo
+        g2d.setColor(colorBorde);
+        g2d.setStroke(new BasicStroke(2.0f));
+        g2d.draw(new Ellipse2D.Double(
+                x - DIAMETRO_NODO/2, y - DIAMETRO_NODO/2,
+                DIAMETRO_NODO, DIAMETRO_NODO
+        ));
+
+        // Dibujar el valor
+        String valorStr = String.valueOf(nodo.valor);
+        g2d.setFont(new Font("Arial", Font.BOLD, 14));
+        FontMetrics fm = g2d.getFontMetrics();
+        g2d.setColor(colorTexto);
+        g2d.drawString(valorStr,
+                x - fm.stringWidth(valorStr) / 2,
+                y + fm.getAscent() / 2
+        );
+
+        // Calcular nuevo espacio horizontal para los hijos
+        int nuevoEspacio = Math.max(espacio / 2, DIAMETRO_NODO * 2);
+
+        // Dibujar los nodos hijos
+        if (nodo.izquierdo != null) {
+            dibujarNodo(g2d, nodo.izquierdo, x - espacio, y + ESPACIO_VERTICAL,
+                    nuevoEspacio, nivel + 1, alturaTotal);
         }
+        if (nodo.derecho != null) {
+            dibujarNodo(g2d, nodo.derecho, x + espacio, y + ESPACIO_VERTICAL,
+                    nuevoEspacio, nivel + 1, alturaTotal);
+        }
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        if (arbol != null && arbol.raiz != null) {
+            int altura = arbol.obtenerAltura(arbol.raiz);
+            return new Dimension(
+                    DIAMETRO_NODO * (1 << altura) + PADDING * 2,
+                    ESPACIO_VERTICAL * altura + DIAMETRO_NODO * 2 + PADDING * 2
+            );
+        }
+        return new Dimension(300, 200);
     }
 }

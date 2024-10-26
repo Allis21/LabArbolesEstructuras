@@ -72,4 +72,65 @@ public class ArbolBinario {
         }
         return resultado.toString();
     }
+    public int obtenerNivel(int valor) {
+        return obtenerNivelRec(raiz, valor, 1);
+    }
+
+    private int obtenerNivelRec(Nodo nodo, int valor, int nivel) {
+        if (nodo == null) return -1; // Si el nodo es nulo, el valor no se encuentra
+        if (nodo.valor == valor) return nivel;
+
+        int resultadoIzq = obtenerNivelRec(nodo.izquierdo, valor, nivel + 1);
+        if (resultadoIzq != -1) return resultadoIzq; // Si encontró en el lado izquierdo, retorna
+
+        return obtenerNivelRec(nodo.derecho, valor, nivel + 1); // Busca en el lado derecho
+    }
+    public int obtenerMinimoNoRecursivo() {
+        if (raiz == null) throw new RuntimeException("El árbol está vacío");
+        Nodo actual = raiz;
+        while (actual.izquierdo != null) {
+            actual = actual.izquierdo;
+        }
+        return actual.valor;
+    }
+    public void imprimirHorizontal() {
+        imprimirHorizontalRec(raiz, 0);
+    }
+
+    private void imprimirHorizontalRec(Nodo nodo, int nivel) {
+        if (nodo == null) return;
+        imprimirHorizontalRec(nodo.derecho, nivel + 1);
+        System.out.println("    ".repeat(nivel) + nodo.valor);
+        imprimirHorizontalRec(nodo.izquierdo, nivel + 1);
+    }
+    public boolean sonIdenticos(ArbolBinario otroArbol) {
+        return sonIdenticosRec(this.raiz, otroArbol.raiz);
+    }
+
+    private boolean sonIdenticosRec(Nodo nodo1, Nodo nodo2) {
+        if (nodo1 == null && nodo2 == null) return true;
+        if (nodo1 == null || nodo2 == null) return false;
+        return (nodo1.valor == nodo2.valor) &&
+                sonIdenticosRec(nodo1.izquierdo, nodo2.izquierdo) &&
+                sonIdenticosRec(nodo1.derecho, nodo2.derecho);
+    }
+    public int obtenerAlturaSinRecursividad() {
+        if (raiz == null) return 0;
+        Queue<Nodo> cola = new LinkedList<>();
+        cola.add(raiz);
+        int altura = 0;
+
+        while (!cola.isEmpty()) {
+            int cantidadNodos = cola.size();
+            altura++;
+            for (int i = 0; i < cantidadNodos; i++) {
+                Nodo actual = cola.poll();
+                if (actual.izquierdo != null) cola.add(actual.izquierdo);
+                if (actual.derecho != null) cola.add(actual.derecho);
+            }
+        }
+        return altura;
+    }
+
+
 }
