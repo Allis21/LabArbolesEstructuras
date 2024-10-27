@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e0d34078-85ff-47e5-a7a4-dafa33a11411" name="Changes" comment="se agrego el boton de obtener altura sin recursividad">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Arbol/ArbolBinario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Arbol/ArbolBinario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/ArbolBinarioApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/ArbolBinarioApp.java" afterDir="false" />
-    </list>
+    <list default="true" id="e0d34078-85ff-47e5-a7a4-dafa33a11411" name="Changes" comment="se agrego el boton de obtener altura sin recursividad" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,12 +26,12 @@
     &quot;assignee&quot;: &quot;Parca15&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Allis21/LabArbolesEstructuras.git&quot;,
-    &quot;accountId&quot;: &quot;d916f017-ffb9-4aec-a5ea-5325d4eec085&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Allis21/LabArbolesEstructuras.git",
+    "accountId": "8375f61a-e8bf-4a47-82ac-f3826160833c"
   }
-}</component>
+}]]></component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
