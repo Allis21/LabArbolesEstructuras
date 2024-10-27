@@ -147,7 +147,7 @@ public class ArbolBinario {
         return obtenerMinimoRecursivo(nodo.izquierdo);
     }
 
-    public void dibujarExpresionA() {
+    public static NodoExpresion dibujarExpresionA() {
         NodoExpresion nodoMultiplicacion = new NodoExpresion("*");
         NodoExpresion nodoDivision = new NodoExpresion("/");
         NodoExpresion nodoSuma = new NodoExpresion("+");
@@ -165,7 +165,7 @@ public class ArbolBinario {
         nodoSuma.izquierdo = nodoMultiplicacion;
         nodoSuma.derecho = nodoDivision;
 
-        raizExpresion = nodoSuma;
+        return nodoSuma;
     }
 
     public static NodoExpresion dibujarExpresionB() {
@@ -188,4 +188,40 @@ public class ArbolBinario {
 
         return nodoABCD;
     }
+
+    public static NodoExpresion dibujarExpresionC() {
+        NodoExpresion nodoNegativoA = new NodoExpresion("-");
+        NodoExpresion nodoSumaXY = new NodoExpresion("+");
+        NodoExpresion nodoSumaNegA_XY = new NodoExpresion("+");
+        NodoExpresion nodoMultiplicacionCD = new NodoExpresion("*");
+        NodoExpresion nodoMultiplicacionB_CD = new NodoExpresion("*");
+        NodoExpresion nodoDivision = new NodoExpresion("/");
+
+        NodoExpresion nodoA = new NodoExpresion("a");
+        NodoExpresion nodoX = new NodoExpresion("x");
+        NodoExpresion nodoY = new NodoExpresion("y");
+        NodoExpresion nodoB = new NodoExpresion("b");
+        NodoExpresion nodoC = new NodoExpresion("c");
+        NodoExpresion nodoD = new NodoExpresion("d");
+
+        // Crear subárbol de ((- a) + (x + y))
+        nodoNegativoA.izquierdo = nodoA;
+        nodoSumaXY.izquierdo = nodoX;
+        nodoSumaXY.derecho = nodoY;
+        nodoSumaNegA_XY.izquierdo = nodoNegativoA;
+        nodoSumaNegA_XY.derecho = nodoSumaXY;
+
+        // Crear subárbol de ((+b) * (c * d))
+        nodoMultiplicacionCD.izquierdo = nodoC;
+        nodoMultiplicacionCD.derecho = nodoD;
+        nodoMultiplicacionB_CD.izquierdo = nodoB;
+        nodoMultiplicacionB_CD.derecho = nodoMultiplicacionCD;
+
+        // Crear el nodo raíz con división de los dos subárboles
+        nodoDivision.izquierdo = nodoSumaNegA_XY;
+        nodoDivision.derecho = nodoMultiplicacionB_CD;
+
+        return nodoDivision;
+    }
+
 }

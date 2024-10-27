@@ -90,8 +90,13 @@ public class ArbolBinarioApp extends JFrame {
         JButton btnImprimirHorizontal = crearBoton("Imprimir Horizontal", "Muestra los árboles en formato horizontal");
         JButton btnMinimoRecursivo = crearBoton("Valor Mínimo (Recursivo)", "Encuentra el valor mínimo en ambos árboles usando recursividad");
 
+
+        //Botón para ver el árbol A
+        JButton btnVerAlgebraicoA = crearBoton("Ver Árbol A", "Muestra el árbol A");
         //Botón para ver el árbol B
         JButton btnVerAlgebraico = crearBoton("Ver Árbol B", "Muestra el árbol B");
+        //Botón para ver el árbol c
+        JButton btnVerAlgebraicoC = crearBoton("Ver Árbol C", "Muestra el árbol C");
         // Adding buttons in order by row
         // First row - Basic operations for both trees
         panelBotones.add(btnCrearArbol1);
@@ -118,7 +123,9 @@ public class ArbolBinarioApp extends JFrame {
         panelBotones.add(new JPanel());
         panelBotones.add(new JPanel());
 
+        panelBotones.add(btnVerAlgebraicoA);
         panelBotones.add(btnVerAlgebraico);
+        panelBotones.add(btnVerAlgebraicoC);
 
         // Action Listeners
         btnCrearArbol1.addActionListener(e -> {
@@ -148,11 +155,24 @@ public class ArbolBinarioApp extends JFrame {
         btnImprimirHorizontal.addActionListener(e -> imprimirHorizontal());
         btnMinimoRecursivo.addActionListener(e -> obtenerMinimosRecursivo());
 
+        btnVerAlgebraicoA.addActionListener(e -> mostrarArbolesAlgebraicosA());
         btnVerAlgebraico.addActionListener(e -> mostrarArbolesAlgebraicos());
+        btnVerAlgebraicoC.addActionListener(e -> mostrarArbolesAlgebraicosC());
     }
 
-    //Método para abrir la ventana del árbol B
+    //Métodos para abrir la ventana del árbol A,B C
+    private void mostrarArbolesAlgebraicosA() {
+        JFrame ventanaArboles = new JFrame("Árbol A");
+        ventanaArboles.setSize(800, 600);
+        ventanaArboles.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+        PanelDibujo panelDibujoExpresion = new PanelDibujo();
+        NodoExpresion raiz = ArbolBinario.dibujarExpresionA();  // Llama al método que genera el árbol
+        panelDibujoExpresion.setArbol(raiz);
+
+        ventanaArboles.add(panelDibujoExpresion);
+        ventanaArboles.setVisible(true);
+    }
     private void mostrarArbolesAlgebraicos() {
         JFrame ventanaArboles = new JFrame("Árbol B");
         ventanaArboles.setSize(800, 600);
@@ -160,6 +180,19 @@ public class ArbolBinarioApp extends JFrame {
 
         PanelDibujo panelDibujoExpresion = new PanelDibujo();
         NodoExpresion raiz = ArbolBinario.dibujarExpresionB();  // Llama al método que genera el árbol
+        panelDibujoExpresion.setArbol(raiz);
+
+        ventanaArboles.add(panelDibujoExpresion);
+        ventanaArboles.setVisible(true);
+    }
+
+    private void mostrarArbolesAlgebraicosC() {
+        JFrame ventanaArboles = new JFrame("Árbol C");
+        ventanaArboles.setSize(800, 600);
+        ventanaArboles.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        PanelDibujo panelDibujoExpresion = new PanelDibujo();
+        NodoExpresion raiz = ArbolBinario.dibujarExpresionC();  // Llama al método que genera el árbol
         panelDibujoExpresion.setArbol(raiz);
 
         ventanaArboles.add(panelDibujoExpresion);
