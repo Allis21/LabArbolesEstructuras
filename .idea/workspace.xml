@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e0d34078-85ff-47e5-a7a4-dafa33a11411" name="Changes" comment="se agrego el boton de obtener altura sin recursividad">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Arbol/NodoExpresion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Arbol/ArbolBinario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Arbol/ArbolBinario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/ArbolBinarioApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/ArbolBinarioApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/PanelDibujo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/PanelDibujo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,13 +91,6 @@
         <item itemvalue="Application.ArbolBinarioApp" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-21.0.2-semeru-21.0.2-4caba194b151-2a6dbd63" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

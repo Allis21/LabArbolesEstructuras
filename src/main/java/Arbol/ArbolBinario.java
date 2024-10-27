@@ -1,6 +1,5 @@
 package Arbol;
 
-
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -169,5 +168,24 @@ public class ArbolBinario {
         raizExpresion = nodoSuma;
     }
 
+    public static NodoExpresion dibujarExpresionB() {
+        NodoExpresion a = new NodoExpresion("a");
+        NodoExpresion b = new NodoExpresion("b");
+        NodoExpresion c = new NodoExpresion("c");
+        NodoExpresion d = new NodoExpresion("d");
 
+        NodoExpresion nodoAB = new NodoExpresion("+");
+        nodoAB.izquierdo = a;
+        nodoAB.derecho = b;
+
+        NodoExpresion nodoABC = new NodoExpresion("+");
+        nodoABC.izquierdo = nodoAB;
+        nodoABC.derecho = c;
+
+        NodoExpresion nodoABCD = new NodoExpresion("+");
+        nodoABCD.izquierdo = nodoABC;
+        nodoABCD.derecho = d;
+
+        return nodoABCD;
+    }
 }
